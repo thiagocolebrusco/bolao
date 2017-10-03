@@ -1,18 +1,11 @@
 import '../css/main.scss';
-import { RandomGenerator } from './random-generator';
+import Vue from 'vue'
+import App from '../components/App.vue'
+//import router from './router'
 
-const outputParagraph = document.querySelector('#outputParagraph');
-
-const outputRandomInt = () => {
-    outputParagraph.textContent = RandomGenerator.randomInteger();
-};
-
-const outputRandomRange = () => {
-    outputParagraph.textContent = RandomGenerator.randomRange(1, 500);
-};
-
-const buttonRndInt = document.querySelector('#randomInt');
-const buttonRndRange = document.querySelector('#randomRange');
-
-buttonRndInt.addEventListener('click', outputRandomInt);
-buttonRndRange.addEventListener('click', outputRandomRange);
+var app = new Vue({
+  el: '#app',
+//  router,
+  template: '<App/>',
+  components: { App }
+})

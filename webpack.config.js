@@ -4,18 +4,36 @@ var HtmlWebpackPlugin = require('html-webpack-plugin');
 var CleanWebpackPlugin = require('clean-webpack-plugin');
 
 var extractPlugin = new ExtractTextPlugin({
-   filename: 'main.css'
+    filename: 'main.css'
 });
 
+function resolve (dir) {
+  return path.join(__dirname, '..', dir)
+}
+
+
 module.exports = {
-    entry: './src/js/app.js',
+    entry: {
+        app: './src/js/app.js'
+    },
     output: {
         path: path.resolve(__dirname, 'dist'),
         filename: 'bundle.js',
-//        publicPath: '/dist'
+        //        publicPath: '/dist'
+    },
+    resolve: {
+        extensions: ['.js', '.vue', '.json'],
+        alias: {
+            'vue$': 'vue/dist/vue.esm.js',
+            '@': resolve('src')
+        }
     },
     module: {
         rules: [
+            {
+                test: /\.vue$/,
+                loader: 'vue-loader'
+            },
             {
                 test: /\.js$/,
                 use: [
